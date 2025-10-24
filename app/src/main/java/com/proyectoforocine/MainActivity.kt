@@ -21,16 +21,23 @@ import com.proyectoforocine.view.CrearTemaScreen
 import com.proyectoforocine.view.DetalleTemaScreen
 import com.proyectoforocine.view.ListaTemasScreen
 import com.proyectoforocine.view.LoginScreen
+import com.proyectoforocine.view.PerfilScreen
 import com.proyectoforocine.viewmodel.ForoViewModel
+import com.proyectoforocine.viewmodel.PerfilViewModel
 
 class MainActivity : ComponentActivity() {
 
     private val foroViewModel: ForoViewModel by viewModels()
+    private val perfilViewModel: PerfilViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProyectoForoCineTheme {
+            // Observar modo oscuro desde el perfil
+            val perfilUiState by perfilViewModel.uiState.collectAsState()
+            val modoOscuro = perfilUiState.profile.modoOscuro
+            
+            ProyectoForoCineTheme(darkTheme = modoOscuro) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -55,7 +62,8 @@ class MainActivity : ComponentActivity() {
                             ListaTemasScreen(
                                 temas = foroViewModel.temas,
                                 onTemaClick = { tema -> navController.navigate("detalle_tema/${tema.id}") },
-                                onAddTemaClick = { navController.navigate("crear_tema") }
+                                onAddTemaClick = { navController.navigate("crear_tema") },
+                                onPerfilClick = { navController.navigate("perfil") }
                             )
                         }
 
@@ -66,7 +74,6 @@ class MainActivity : ComponentActivity() {
                             val temaId = backStackEntry.arguments?.getLong("temaId")
                             requireNotNull(temaId) { "El ID del tema no puede ser nulo" }
 
-                            // Efecto para cargar el tema cuando el ID cambia
                             LaunchedEffect(temaId) {
                                 foroViewModel.seleccionarTema(temaId)
                             }
@@ -96,6 +103,20 @@ class MainActivity : ComponentActivity() {
                                         navController.popBackStack()
                                     }
                                 },
+                                onNavigateBack = { navController.popBackStack() }
+                            )
+                        }
+
+                        composable("perfil") {
+                            val uiState by perfilViewModel.uiState.collectAsState()
+                            PerfilScreen(
+                                uiState = uiState,
+                                onNombreChange = perfilViewModel::onNombreChange,
+                                onFotoSeleccionada = perfilViewModel::onFotoSeleccionada,
+                                onModoOscuroToggle = perfilViewModel::onModoOscuroToggle,
+                                onNotificacionesToggle = perfilViewModel::onNotificacionesToggle,
+                                onShowImageSourceDialog = perfilViewModel::onShowImageSourceDialog,
+                                onHideImageSourceDialog = perfilViewModel::onHideImageSourceDialog,
                                 onNavigateBack = { navController.popBackStack() }
                             )
                         }

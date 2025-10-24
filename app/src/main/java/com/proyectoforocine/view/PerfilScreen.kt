@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,6 +23,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,6 +35,8 @@ import com.proyectoforocine.model.PerfilUiState
 import com.proyectoforocine.model.UserProfile
 import com.proyectoforocine.ui.theme.ProyectoForoCineTheme
 import java.io.File
+import com.proyectoforocine.R
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +58,7 @@ fun PerfilScreen(
     val photoFile = remember {
         File(context.cacheDir, "perfil_temp_${System.currentTimeMillis()}.jpg")
     }
-    
+
     val photoUri = remember {
         FileProvider.getUriForFile(
             context,
@@ -296,13 +301,24 @@ fun PerfilScreen(
                                     ) == PackageManager.PERMISSION_GRANTED -> {
                                         cameraLauncher.launch(photoUri)
                                     }
+
                                     else -> {
                                         cameraPermissionLauncher.launch(permission)
                                     }
                                 }
                             }
                         ) {
-                            Text("📷 Cámara")
+                            Row(
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    painter = painterResource(R.drawable.add_a_photo_24px),
+                                    contentDescription = "Cámara"
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text("Cámara")
+                            }
                         }
 
                         // Botón Galería
@@ -318,6 +334,7 @@ fun PerfilScreen(
                                         ) == PackageManager.PERMISSION_GRANTED -> {
                                             galleryLauncher.launch("image/*")
                                         }
+
                                         else -> {
                                             galleryPermissionLauncher.launch(permission)
                                         }
@@ -328,7 +345,17 @@ fun PerfilScreen(
                                 }
                             }
                         ) {
-                            Text("🖼️ Galería")
+                            Row(
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    painter = painterResource(R.drawable.add_photo_alternate_24px),
+                                    contentDescription = "Galeria"
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text("Galeria")
+                            }
                         }
                     }
                 },
