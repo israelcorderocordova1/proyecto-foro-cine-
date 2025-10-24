@@ -16,10 +16,14 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 // Estado para el formulario de creación
+// Importa la lista de categorías al inicio de tu archivo
+import com.proyectoforocine.model.categoriasPeliculas
 data class CrearTemaUiState(
     val titulo: String = "",
     val contenido: String = "",
-    val errorTitulo: String? = null
+    val categoria: String = categoriasPeliculas[0],
+    val errorTitulo: String? = null,
+    val errorContenido: String? = null
 )
 
 class ForoViewModel(application: Application) : AndroidViewModel(application) {
@@ -35,6 +39,7 @@ class ForoViewModel(application: Application) : AndroidViewModel(application) {
         initialValue = null
     )
 
+
     // --- ESTADO PANTALLA DETALLE ---
     private val _temaSeleccionado = MutableStateFlow<TemaForo?>(null)
     val temaSeleccionado = _temaSeleccionado.asStateFlow()
@@ -46,6 +51,7 @@ class ForoViewModel(application: Application) : AndroidViewModel(application) {
     fun onTituloChange(titulo: String) {
         _crearTemaUiState.update { it.copy(titulo = titulo, errorTitulo = null) }
     }
+
 
     fun onContenidoChange(contenido: String) {
         _crearTemaUiState.update { it.copy(contenido = contenido) }
@@ -60,6 +66,8 @@ class ForoViewModel(application: Application) : AndroidViewModel(application) {
             userPreferencesRepository.saveUserRole(rol)
         }
     }
+
+
 
     fun validarYCrearTema(): Boolean {
         val estado = _crearTemaUiState.value
