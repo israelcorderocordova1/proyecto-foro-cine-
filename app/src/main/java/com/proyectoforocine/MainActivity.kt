@@ -16,16 +16,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.proyectoforocine.model.TemaForo
+import com.proyectoforocine.model.Usuario
 import com.proyectoforocine.ui.theme.ProyectoForoCineTheme
 import com.proyectoforocine.view.CrearTemaScreen
 import com.proyectoforocine.view.DetalleTemaScreen
 import com.proyectoforocine.view.ListaTemasScreen
 import com.proyectoforocine.view.LoginScreen
 import com.proyectoforocine.viewmodel.ForoViewModel
+import com.proyectoforocine.viewmodel.ForoViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
-    private val foroViewModel: ForoViewModel by viewModels()
+    private val foroViewModel: ForoViewModel by viewModels {
+        ForoViewModelFactory((application as ForoApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +57,10 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable("lista_temas") {
+                            val temas by foroViewModel.temas.collectAsState()
+                            // Aquí usamos el ID original de la base de datos (Int) al navegar
                             ListaTemasScreen(
-                                temas = foroViewModel.temas,
+                                temas = temas, // Pasamos la lista de entidades directamente
                                 onTemaClick = { tema -> navController.navigate("detalle_tema/${tema.id}") },
                                 onAddTemaClick = { navController.navigate("crear_tema") }
                             )
@@ -61,12 +68,13 @@ class MainActivity : ComponentActivity() {
 
                         composable(
                             route = "detalle_tema/{temaId}",
-                            arguments = listOf(navArgument("temaId") { type = NavType.LongType })
+                            arguments = listOf(navArgument("temaId") { type = NavType.IntType })
                         ) { backStackEntry ->
-                            val temaId = backStackEntry.arguments?.getLong("temaId")
+                            val temaId = backStackEntry.arguments?.getInt("temaId")
                             requireNotNull(temaId) { "El ID del tema no puede ser nulo" }
 
-                            // Efecto para cargar el tema cuando el ID cambia
+                            // LaunchedEffect se usa para llamar a funciones de suspensión de forma segura
+                            // cuando cambia una clave, en este caso, el temaId.
                             LaunchedEffect(temaId) {
                                 foroViewModel.seleccionarTema(temaId)
                             }
@@ -74,13 +82,26 @@ class MainActivity : ComponentActivity() {
                             val tema by foroViewModel.temaSeleccionado.collectAsState()
                             val rol by foroViewModel.rolUsuario.collectAsState()
 
+                            // El mapeo al modelo de la UI se hace aquí, una vez que tenemos el tema seleccionado
+                            val temaForo = tema?.let {
+                                TemaForo(
+                                    id = it.id.toLong(),
+                                    titulo = it.titulo,
+                                    contenido = it.contenido,
+                                    autor = Usuario(id = "1", nombre = "Autor Anónimo", rol = "registrado"),
+                                    categoria = "General"
+                                )
+                            }
+
                             DetalleTemaScreen(
-                                tema = tema,
+                                tema = temaForo, // Puede ser nulo mientras carga
                                 rol = rol,
                                 onNavigateBack = { navController.popBackStack() },
                                 onDeleteTema = {
-                                    tema?.let { foroViewModel.eliminarTema(it) }
-                                    navController.popBackStack()
+                                    tema?.let {
+                                        foroViewModel.eliminarTema(it)
+                                        navController.popBackStack()
+                                    }
                                 }
                             )
                         }

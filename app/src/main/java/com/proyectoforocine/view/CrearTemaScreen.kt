@@ -13,8 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.proyectoforocine.ui.theme.ProyectoForoCineTheme
+// Asegúrate de que este import sea el correcto
 import com.proyectoforocine.viewmodel.CrearTemaUiState
 
+/**
+ * Pantalla para crear un nuevo tema. Es "tonta" (stateless).
+ * No contiene lógica de ViewModel. Recibe el estado (uiState)
+ * y los eventos (lambdas) desde un Composable superior (MainActivity).
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CrearTemaScreen(
@@ -37,22 +43,27 @@ fun CrearTemaScreen(
         }
     ) { paddingValues ->
         Column(
-            modifier = Modifier.padding(paddingValues).padding(16.dp)
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(16.dp)
         ) {
             OutlinedTextField(
                 value = uiState.titulo,
                 onValueChange = onTituloChange,
                 label = { Text("Agrega un Título") },
                 modifier = Modifier.fillMaxWidth(),
-                isError = uiState.errorTitulo != null,
+                // --- CORRECCIÓN AQUÍ ---
+                isError = uiState.error != null,
                 singleLine = true
             )
-            if (uiState.errorTitulo != null) {
+            // --- CORRECCIÓN AQUÍ ---
+            if (uiState.error != null) {
                 Text(
-                    text = uiState.errorTitulo,
+                    // --- CORRECCIÓN AQUÍ ---
+                    text = uiState.error,
                     color = MaterialTheme.colorScheme.error,
                     style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(start = 16.dp)
+                    modifier = Modifier.padding(start = 16.dp, top = 4.dp)
                 )
             }
 
@@ -62,7 +73,9 @@ fun CrearTemaScreen(
                 value = uiState.contenido,
                 onValueChange = onContenidoChange,
                 label = { Text("Cuentanos sobre el tema que escogiste") },
-                modifier = Modifier.fillMaxWidth().height(200.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
             )
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -76,6 +89,7 @@ fun CrearTemaScreen(
         }
     }
 }
+
 
 @Preview(showBackground = true, name = "Crear Tema - Normal")
 @Composable
@@ -96,7 +110,8 @@ fun CrearTemaScreenPreview() {
 fun CrearTemaScreenErrorPreview() {
     ProyectoForoCineTheme {
         CrearTemaScreen(
-            uiState = CrearTemaUiState(errorTitulo = "El título no puede estar vacío"),
+            // --- CORRECCIÓN AQUÍ ---
+            uiState = CrearTemaUiState(error = "El título no puede estar vacío"),
             onTituloChange = {},
             onContenidoChange = {},
             onPublicarClick = {},
