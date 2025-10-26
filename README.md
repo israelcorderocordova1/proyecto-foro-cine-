@@ -4,6 +4,6 @@ Este es un proyecto para la materia de aplicaciones móviles. Consiste en una ap
 
 **Integrantes:**
 *   Israel Cordero
-*   [Nombre del compañero 1]
-*   [Nombre del compañero 2]
+*   Marcelo Rivera
+*   Sebastian Jara
 
