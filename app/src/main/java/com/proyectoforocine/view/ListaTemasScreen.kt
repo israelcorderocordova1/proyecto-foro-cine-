@@ -38,8 +38,14 @@ fun ListaTemasScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddTemaClick) {
-                Icon(Icons.Default.Add, contentDescription = "Crear Tema")
+            FloatingActionButton(
+                onClick = {
+                    // Esta línea le dice que abra la nueva ruta
+                    val navController = null
+                    navController.navigate("publicar_tema")
+                }
+            ) {
+                Icon(Icons.Default.Add, contentDescription = "Publicar tema")
             }
         }
     ) { paddingValues ->
@@ -53,6 +59,9 @@ fun ListaTemasScreen(
             }
         }
     }
+}
+
+private fun Nothing?.navigate(string: String) {
 }
 
 @Composable
