@@ -16,14 +16,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 // Estado para el formulario de creación
-// Importa la lista de categorías al inicio de tu archivo
-import com.proyectoforocine.model.categoriasPeliculas
 data class CrearTemaUiState(
     val titulo: String = "",
     val contenido: String = "",
-    val categoria: String = categoriasPeliculas[0],
-    val errorTitulo: String? = null,
-    val errorContenido: String? = null
+    val errorTitulo: String? = null
 )
 
 class ForoViewModel(application: Application) : AndroidViewModel(application) {
@@ -39,19 +35,17 @@ class ForoViewModel(application: Application) : AndroidViewModel(application) {
         initialValue = null
     )
 
-
     // --- ESTADO PANTALLA DETALLE ---
     private val _temaSeleccionado = MutableStateFlow<TemaForo?>(null)
     val temaSeleccionado = _temaSeleccionado.asStateFlow()
 
-    // --- ESTADO PANTALLA CREACIÓN ---
+    // --- ESTADO PANTALLA CREACIÓN (NO LO USAREMOS EN ESTA FÓRMULA) ---
     private val _crearTemaUiState = MutableStateFlow(CrearTemaUiState())
     val crearTemaUiState = _crearTemaUiState.asStateFlow()
 
     fun onTituloChange(titulo: String) {
         _crearTemaUiState.update { it.copy(titulo = titulo, errorTitulo = null) }
     }
-
 
     fun onContenidoChange(contenido: String) {
         _crearTemaUiState.update { it.copy(contenido = contenido) }
@@ -67,20 +61,15 @@ class ForoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
-
+    // (Esta función la ignoraremos)
     fun validarYCrearTema(): Boolean {
         val estado = _crearTemaUiState.value
         if (estado.titulo.isBlank()) {
             _crearTemaUiState.update { it.copy(errorTitulo = "El título no puede estar vacío") }
             return false
         }
-
-        // Asumimos que hay un usuario "logueado" con el rol guardado
         val autor = Usuario(id = "2", nombre = "Nuevo Usuario", rol = rolUsuario.value ?: "registrado")
         ForoRepository.addTema(estado.titulo, estado.contenido, autor)
-
-        // Limpiamos el formulario
         _crearTemaUiState.value = CrearTemaUiState()
         return true
     }
@@ -88,4 +77,15 @@ class ForoViewModel(application: Application) : AndroidViewModel(application) {
     fun eliminarTema(tema: TemaForo) {
         ForoRepository.deleteTema(tema)
     }
+
+    fun crearNuevoTema(titulo: String, contenido: String, categoria: String) {
+        // Obtenemos el rol del usuario que está guardado
+        val autor = Usuario(id = "2", nombre = "Nuevo Usuario", rol = rolUsuario.value ?: "registrado")
+
+        // Llamamos al repositorio para añadir el tema
+        ForoRepository.addTema(titulo, contenido, autor)
+
+    }
+    
 }
+
