@@ -27,5 +27,5 @@ Aplicación móvil de Android para discutir películas y series desarrollada par
 
 - Israel Cordero
 - Marcelo Rivera
-- Sebastian Jara
+- Sebastian Novoa
 
