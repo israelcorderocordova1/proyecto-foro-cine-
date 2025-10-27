@@ -33,7 +33,6 @@ class ForoViewModel(private val repository: ForoRepository) : ViewModel() {
     // --- Estado para un tema seleccionado ---
     private val _temaSeleccionado = MutableStateFlow<Tema?>(null)
     val temaSeleccionado: StateFlow<Tema?> = _temaSeleccionado.asStateFlow()
-
     // --- Estado para la pantalla de creación ---
     private val _crearTemaUiState = MutableStateFlow(CrearTemaUiState())
     val crearTemaUiState: StateFlow<CrearTemaUiState> = _crearTemaUiState.asStateFlow()
@@ -49,7 +48,6 @@ class ForoViewModel(private val repository: ForoRepository) : ViewModel() {
             }
         }
     }
-
     fun eliminarTema(tema: Tema) {
         viewModelScope.launch {
             repository.eliminarTema(tema)
@@ -64,7 +62,6 @@ class ForoViewModel(private val repository: ForoRepository) : ViewModel() {
     fun onContenidoChange(nuevoContenido: String) {
         _crearTemaUiState.update { it.copy(contenido = nuevoContenido, error = null) }
     }
-
     fun validarYCrearTema(): Boolean {
         val titulo = _crearTemaUiState.value.titulo
         val contenido = _crearTemaUiState.value.contenido
@@ -73,7 +70,6 @@ class ForoViewModel(private val repository: ForoRepository) : ViewModel() {
             _crearTemaUiState.update { it.copy(error = "El título y el contenido no pueden estar vacíos") }
             return false
         }
-
         viewModelScope.launch {
             val nuevoTema = Tema(titulo = titulo, contenido = contenido)
             repository.insertarTema(nuevoTema)
