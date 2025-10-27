@@ -23,19 +23,29 @@ import com.proyectoforocine.view.CrearTemaScreen
 import com.proyectoforocine.view.DetalleTemaScreen
 import com.proyectoforocine.view.ListaTemasScreen
 import com.proyectoforocine.view.LoginScreen
+import com.proyectoforocine.view.PerfilScreen
 import com.proyectoforocine.viewmodel.ForoViewModel
 import com.proyectoforocine.viewmodel.ForoViewModelFactory
+import com.proyectoforocine.viewmodel.PerfilViewModel
+import com.proyectoforocine.ForoApplication
 
 class MainActivity : ComponentActivity() {
 
+    // ViewModel de foro con Factory (conserva la inyección de repositorio)
     private val foroViewModel: ForoViewModel by viewModels {
         ForoViewModelFactory((application as ForoApplication).repository)
     }
+    // ViewModel de perfil (sin factory específica)
+    private val perfilViewModel: PerfilViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ProyectoForoCineTheme {
+            // Observar modo oscuro desde el perfil
+            val perfilUiState by perfilViewModel.uiState.collectAsState()
+            val modoOscuro = perfilUiState.profile.modoOscuro
+
+            ProyectoForoCineTheme(darkTheme = modoOscuro) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -62,7 +72,8 @@ class MainActivity : ComponentActivity() {
                             ListaTemasScreen(
                                 temas = temas, // Pasamos la lista de entidades directamente
                                 onTemaClick = { tema -> navController.navigate("detalle_tema/${tema.id}") },
-                                onAddTemaClick = { navController.navigate("crear_tema") }
+                                onAddTemaClick = { navController.navigate("crear_tema") },
+                                onPerfilClick = { navController.navigate("perfil") }
                             )
                         }
 
@@ -73,8 +84,6 @@ class MainActivity : ComponentActivity() {
                             val temaId = backStackEntry.arguments?.getInt("temaId")
                             requireNotNull(temaId) { "El ID del tema no puede ser nulo" }
 
-                            // LaunchedEffect se usa para llamar a funciones de suspensión de forma segura
-                            // cuando cambia una clave, en este caso, el temaId.
                             LaunchedEffect(temaId) {
                                 foroViewModel.seleccionarTema(temaId)
                             }
@@ -117,6 +126,20 @@ class MainActivity : ComponentActivity() {
                                         navController.popBackStack()
                                     }
                                 },
+                                onNavigateBack = { navController.popBackStack() }
+                            )
+                        }
+
+                        composable("perfil") {
+                            val uiState by perfilViewModel.uiState.collectAsState()
+                            PerfilScreen(
+                                uiState = uiState,
+                                onNombreChange = perfilViewModel::onNombreChange,
+                                onFotoSeleccionada = perfilViewModel::onFotoSeleccionada,
+                                onModoOscuroToggle = perfilViewModel::onModoOscuroToggle,
+                                onNotificacionesToggle = perfilViewModel::onNotificacionesToggle,
+                                onShowImageSourceDialog = perfilViewModel::onShowImageSourceDialog,
+                                onHideImageSourceDialog = perfilViewModel::onHideImageSourceDialog,
                                 onNavigateBack = { navController.popBackStack() }
                             )
                         }

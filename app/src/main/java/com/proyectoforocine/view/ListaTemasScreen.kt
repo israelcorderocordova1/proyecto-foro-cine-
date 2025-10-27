@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,11 +33,26 @@ import com.proyectoforocine.ui.theme.ProyectoForoCineTheme
 fun ListaTemasScreen(
     temas: List<Tema>,
     onTemaClick: (Tema) -> Unit,
-    onAddTemaClick: () -> Unit
+    onAddTemaClick: () -> Unit,
+    onPerfilClick: () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Foro de Cine") })
+            TopAppBar(
+                title = { Text("Bienvenido a nuestro Foro de Cine") },
+                actions = {
+                    IconButton(onClick = onPerfilClick) {
+                        Icon(
+                            imageVector = Icons.Default.AccountCircle,
+                            contentDescription = "Mi Perfil"
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary
+                )
+            )
         },
         floatingActionButton = {
             FloatingActionButton(onClick = onAddTemaClick) {
@@ -107,7 +123,7 @@ fun ListaTemasScreenPreview() {
             Tema(id = 1, titulo = "Review de Dune 2", contenido = "Una obra maestra de la ciencia ficción..."),
             Tema(id = 2, titulo = "Peliculas sobrevaloradas?", contenido = "Abro debate: El Padrino está sobrevalorada.")
         )
-        ListaTemasScreen(temas = sampleTemas, onTemaClick = {}, onAddTemaClick = {})
+        ListaTemasScreen(temas = sampleTemas, onTemaClick = {}, onAddTemaClick = {}, onPerfilClick = {})
     }
 }
 
@@ -115,6 +131,6 @@ fun ListaTemasScreenPreview() {
 @Composable
 fun ListaTemasScreenEmptyPreview() {
     ProyectoForoCineTheme {
-        ListaTemasScreen(temas = emptyList(), onTemaClick = {}, onAddTemaClick = {})
+        ListaTemasScreen(temas = emptyList(), onTemaClick = {}, onAddTemaClick = {}, onPerfilClick = {})
     }
 }
