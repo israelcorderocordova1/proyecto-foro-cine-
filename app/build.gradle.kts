@@ -35,11 +35,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -52,6 +52,11 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
 }
 
 dependencies {
@@ -79,8 +84,25 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
     // --- FIN ROOM ---
 
-    // Test
+    // Pruebas unitarias
     testImplementation("junit:junit:4.13.2")
+    
+    // MockK para crear mocks en Kotlin
+    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("io.mockk:mockk-android:1.13.8")
+    
+    // Pruebas de corrutinas
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    
+    // Arch Core Testing para pruebas de LiveData/StateFlow
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    
+    // Pruebas de Room
+    testImplementation("androidx.room:room-testing:$room_version")
+    
+    // Pruebas de DataStore
+    testImplementation("androidx.datastore:datastore-preferences-core:1.1.1")
+    
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.06.00"))
