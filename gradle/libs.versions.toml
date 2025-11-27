@@ -1,6 +1,6 @@
 
 [versions]
-agp = "8.13.0"
+agp = "8.13.1"
 kotlin = "2.0.21"
 # --- INICIO DE LA CORRECCIÓN ---
 # La versión de KSP debe ser compatible con tu versión de Kotlin.
