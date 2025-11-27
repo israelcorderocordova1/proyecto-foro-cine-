@@ -35,6 +35,7 @@ class MainActivity : ComponentActivity() {
     private val foroViewModel: ForoViewModel by viewModels {
         ForoViewModelFactory((application as ForoApplication).repository)
     }
+
     // ViewModel de perfil (sin factory específica)
     private val perfilViewModel: PerfilViewModel by viewModels()
 
@@ -57,11 +58,19 @@ class MainActivity : ComponentActivity() {
                             LoginScreen(
                                 onLoginAsUser = {
                                     foroViewModel.guardarRol("registrado")
-                                    navController.navigate("lista_temas") { popUpTo("login") { inclusive = true } }
+                                    navController.navigate("lista_temas") {
+                                        popUpTo("login") {
+                                            inclusive = true
+                                        }
+                                    }
                                 },
                                 onLoginAsModerator = {
                                     foroViewModel.guardarRol("moderador")
-                                    navController.navigate("lista_temas") { popUpTo("login") { inclusive = true } }
+                                    navController.navigate("lista_temas") {
+                                        popUpTo("login") {
+                                            inclusive = true
+                                        }
+                                    }
                                 }
                             )
                         }
@@ -97,7 +106,11 @@ class MainActivity : ComponentActivity() {
                                     id = it.id.toLong(),
                                     titulo = it.titulo,
                                     contenido = it.contenido,
-                                    autor = Usuario(id = "1", nombre = "Autor Anónimo", rol = "registrado"),
+                                    autor = Usuario(
+                                        id = "1",
+                                        nombre = "Autor Anónimo",
+                                        rol = "registrado"
+                                    ),
                                     categoria = "General"
                                 )
                             }
