@@ -22,7 +22,7 @@ class LoginScreenTest {
         // Esperar a que la actividad se lance completamente
         composeTestRule.waitForIdle()
         Thread.sleep(2000) // Tiempo generoso para que Compose se renderice
-        
+
         // Verificar que hay contenido en la pantalla
         composeTestRule.onRoot().assertExists()
     }
@@ -31,10 +31,10 @@ class LoginScreenTest {
     fun loginScreenShouldHaveClickableElements() {
         composeTestRule.waitForIdle()
         Thread.sleep(2000)
-        
+
         // Buscar cualquier elemento clickeable
         composeTestRule.onRoot().printToLog("COMPOSE_TREE")
-        
+
         // Verificar que hay nodos clickeables en la UI
         try {
             composeTestRule.onAllNodes(hasClickAction()).fetchSemanticsNodes().isNotEmpty()

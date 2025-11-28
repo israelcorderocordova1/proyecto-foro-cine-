@@ -20,10 +20,10 @@ class CrearTemaScreenTest {
     fun activityLaunchesWithComposeContent() {
         composeTestRule.waitForIdle()
         Thread.sleep(2000)
-        
+
         // Log the compose tree for debugging
         composeTestRule.onRoot().printToLog("COMPOSE_TREE")
-        
+
         // Verify compose hierarchy exists
         composeTestRule.onRoot().assertExists()
     }
@@ -32,7 +32,7 @@ class CrearTemaScreenTest {
     fun composeUIRendersSuccessfully() {
         composeTestRule.waitForIdle()
         Thread.sleep(1500)
-        
+
         // Just verify we can interact with the root
         composeTestRule.onRoot().assertExists()
     }
@@ -41,7 +41,7 @@ class CrearTemaScreenTest {
     fun navigationGraphLoads() {
         composeTestRule.waitForIdle()
         Thread.sleep(1000)
-        
+
         // Verify activity content is set
         composeTestRule.onRoot().assertExists()
     }

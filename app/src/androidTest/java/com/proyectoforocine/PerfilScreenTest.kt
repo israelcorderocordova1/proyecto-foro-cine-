@@ -20,7 +20,7 @@ class PerfilScreenTest {
     fun composeHierarchyExistsAfterLaunch() {
         composeTestRule.waitForIdle()
         Thread.sleep(2000)
-        
+
         composeTestRule.onRoot().printToLog("PROFILE_SCREEN")
         composeTestRule.onRoot().assertExists()
     }
@@ -29,7 +29,7 @@ class PerfilScreenTest {
     fun themeAppliesCorrectly() {
         composeTestRule.waitForIdle()
         Thread.sleep(1500)
-        
+
         // Verify theme content is rendered
         composeTestRule.onRoot().assertExists()
     }
@@ -38,7 +38,7 @@ class PerfilScreenTest {
     fun navigationHostIsPresent() {
         composeTestRule.waitForIdle()
         Thread.sleep(1000)
-        
+
         // Verify NavHost is set up
         composeTestRule.onRoot().assertExists()
     }
@@ -47,7 +47,7 @@ class PerfilScreenTest {
     fun surfaceContainerExists() {
         composeTestRule.waitForIdle()
         Thread.sleep(1000)
-        
+
         // Verify Surface container renders
         composeTestRule.onRoot().assertExists()
     }

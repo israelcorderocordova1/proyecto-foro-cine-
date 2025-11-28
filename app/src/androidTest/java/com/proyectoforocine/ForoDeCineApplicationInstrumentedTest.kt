@@ -24,8 +24,10 @@ class ForoDeCineApplicationInstrumentedTest {
     fun foroDeCineApplicationExtendsApplication() {
         // Verificar que hereda de Application
         val clazz = ForoDeCineApplication::class.java
-        assertTrue("Debe heredar de Application",
-            android.app.Application::class.java.isAssignableFrom(clazz))
+        assertTrue(
+            "Debe heredar de Application",
+            android.app.Application::class.java.isAssignableFrom(clazz)
+        )
     }
 
     @Test
