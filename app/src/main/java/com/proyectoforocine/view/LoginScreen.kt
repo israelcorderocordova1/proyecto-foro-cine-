@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.testTag
 import com.proyectoforocine.ui.theme.ProyectoForoCineTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,13 +36,19 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Button(onClick = onLoginAsUser) {
-                Text("Logea como Usuario")
-            }
+                Button(
+                    onClick = onLoginAsUser,
+                    modifier = Modifier.testTag("loginUserButton")
+                ) {
+                    Text("Logea como Usuario")
+                }
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = onLoginAsModerator) {
-                Text("Logea como Moderador")
-            }
+                Button(
+                    onClick = onLoginAsModerator,
+                    modifier = Modifier.testTag("loginModeratorButton")
+                ) {
+                    Text("Logea como Moderador")
+                }
         }
     }
 }
