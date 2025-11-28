@@ -48,6 +48,18 @@ class MainActivityInstrumentedTest {
                 application is ForoApplication
             )
 
+            // Verificar usando el método público de MainActivity
+            assertTrue(
+                "La inicialización debe ser correcta",
+                activity.verificarInicializacion()
+            )
+            
+            // Verificar estado de inicialización
+            assertTrue(
+                "MainActivity debe estar inicializada",
+                activity.estaInicializado()
+            )
+
             // Verificar que ForoApplication tiene database
             val foroApp = application as ForoApplication
             assertNotNull("Database debe estar inicializado", foroApp.database)
