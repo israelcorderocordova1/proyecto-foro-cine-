@@ -36,10 +36,10 @@ class ForoRepositoryTest {
     @Test
     fun `temas debe retornar lista inicial con 2 temas por defecto`() {
         // Dado - El repositorio es un singleton que puede tener temas de otros tests
-        
+
         // Cuando
         val temas = ForoRepository.temas
-        
+
         // Entonces
         assertNotNull("La lista de temas no debe ser nula", temas)
         assertTrue("Debe ser una lista válida", temas is List)
@@ -52,10 +52,10 @@ class ForoRepositoryTest {
         val temas = ForoRepository.temas
         val primerTema = temas.firstOrNull()
         assertNotNull("Debe existir al menos un tema", primerTema)
-        
+
         // Cuando
         val temaEncontrado = ForoRepository.getTemaById(primerTema!!.id)
-        
+
         // Entonces
         assertNotNull("Debe encontrar el tema", temaEncontrado)
         assertEquals("El ID debe coincidir", primerTema.id, temaEncontrado?.id)
@@ -66,10 +66,10 @@ class ForoRepositoryTest {
     fun `getTemaById debe retornar null para ID inexistente`() {
         // Given
         val idInexistente = 999999L
-        
+
         // When
         val temaEncontrado = ForoRepository.getTemaById(idInexistente)
-        
+
         // Then
         assertNull("No debe encontrar tema con ID inexistente", temaEncontrado)
     }
@@ -80,14 +80,14 @@ class ForoRepositoryTest {
         val cantidadInicial = ForoRepository.temas.size
         val titulo = "Tema de Prueba"
         val contenido = "Contenido de prueba para test unitario"
-        
+
         // When
         ForoRepository.addTema(titulo, contenido, usuarioPrueba)
-        
+
         // Then
         val temasActualizados = ForoRepository.temas
         assertEquals("Debe haber un tema más", cantidadInicial + 1, temasActualizados.size)
-        
+
         val primerTema = temasActualizados.first()
         assertEquals("El título debe coincidir", titulo, primerTema.titulo)
         assertEquals("El contenido debe coincidir", contenido, primerTema.contenido)
@@ -99,14 +99,14 @@ class ForoRepositoryTest {
     fun `addTema debe generar IDs únicos e incrementales`() {
         // Given
         val cantidadInicial = ForoRepository.temas.size
-        
+
         // Cuando - Agregar dos temas
         ForoRepository.addTema("Tema 1", "Contenido 1", usuarioPrueba)
         val id1 = ForoRepository.temas.first().id
-        
+
         ForoRepository.addTema("Tema 2", "Contenido 2", usuarioPrueba)
         val id2 = ForoRepository.temas.first().id
-        
+
         // Entonces
         assertEquals("Debe haber 2 temas más", cantidadInicial + 2, ForoRepository.temas.size)
         assertNotEquals("Los IDs deben ser diferentes", id1, id2)
@@ -119,13 +119,20 @@ class ForoRepositoryTest {
         ForoRepository.addTema("Tema a Eliminar", "Contenido", usuarioPrueba)
         val temaParaEliminar = ForoRepository.temas.first()
         val cantidadAntesDeEliminar = ForoRepository.temas.size
-        
+
         // Cuando
         ForoRepository.deleteTema(temaParaEliminar)
-        
+
         // Entonces
-        assertEquals("Debe haber un tema menos", cantidadAntesDeEliminar - 1, ForoRepository.temas.size)
-        assertNull("El tema eliminado no debe existir", ForoRepository.getTemaById(temaParaEliminar.id))
+        assertEquals(
+            "Debe haber un tema menos",
+            cantidadAntesDeEliminar - 1,
+            ForoRepository.temas.size
+        )
+        assertNull(
+            "El tema eliminado no debe existir",
+            ForoRepository.getTemaById(temaParaEliminar.id)
+        )
     }
 
     @Test
@@ -133,15 +140,15 @@ class ForoRepositoryTest {
         // Dado - Agregar varios temas
         ForoRepository.addTema("Tema 1", "Contenido 1", usuarioPrueba)
         val tema1 = ForoRepository.temas.first()
-        
+
         ForoRepository.addTema("Tema 2", "Contenido 2", usuarioPrueba)
         val tema2 = ForoRepository.temas.first()
-        
+
         ForoRepository.addTema("Tema 3", "Contenido 3", usuarioPrueba)
-        
+
         // Cuando - Eliminar solo el tema del medio
         ForoRepository.deleteTema(tema2)
-        
+
         // Entonces
         assertNull("Tema 2 debe estar eliminado", ForoRepository.getTemaById(tema2.id))
         assertNotNull("Tema 1 debe seguir existiendo", ForoRepository.getTemaById(tema1.id))
@@ -152,11 +159,11 @@ class ForoRepositoryTest {
         // Dado
         val titulo = "Tema Nuevo"
         val contenido = "Contenido nuevo"
-        
+
         // Cuando
         ForoRepository.addTema(titulo, contenido, usuarioPrueba)
         val nuevoTema = ForoRepository.temas.first()
-        
+
         // Entonces
         assertEquals("La valoración inicial debe ser 0", 0, nuevoTema.valoracion)
     }

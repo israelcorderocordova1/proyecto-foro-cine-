@@ -47,11 +47,11 @@ class ForoRepositoryTest {
             Tema(id = 3L, titulo = "Tema 3", contenido = "Contenido 3")
         )
         every { temaDao.obtenerTodosLosTemas() } returns flowOf(temasList)
-        
+
         // Cuando
         val newRepository = ForoRepository(temaDao)
         val result = newRepository.todosLosTemas.first()
-        
+
         // Entonces
         assertEquals(temasList, result)
         assertEquals(3, result.size)
@@ -62,11 +62,11 @@ class ForoRepositoryTest {
     fun `todosLosTemas should return empty list when no temas exist`() = runTest {
         // Dado
         every { temaDao.obtenerTodosLosTemas() } returns flowOf(emptyList())
-        
+
         // Cuando
         val newRepository = ForoRepository(temaDao)
         val result = newRepository.todosLosTemas.first()
-        
+
         // Entonces
         assertTrue(result.isEmpty())
     }
@@ -77,10 +77,10 @@ class ForoRepositoryTest {
         val temaId = 5L
         val tema = Tema(id = temaId, titulo = "Tema Específico", contenido = "Contenido Específico")
         every { temaDao.obtenerTemaPorId(temaId) } returns flowOf(tema)
-        
+
         // Cuando
         val result = repository.obtenerTemaPorId(temaId).first()
-        
+
         // Entonces
         assertEquals(tema, result)
         assertEquals(temaId, result?.id)
@@ -92,10 +92,10 @@ class ForoRepositoryTest {
         // Dado
         val temaId = 999L
         every { temaDao.obtenerTemaPorId(temaId) } returns flowOf(null)
-        
+
         // Cuando
         val result = repository.obtenerTemaPorId(temaId).first()
-        
+
         // Entonces
         assertNull(result)
     }
@@ -105,10 +105,10 @@ class ForoRepositoryTest {
         // Given
         val tema = Tema(titulo = "Nuevo Tema", contenido = "Nuevo Contenido")
         coEvery { temaDao.insertarTema(tema) } just Runs
-        
+
         // When
         repository.insertarTema(tema)
-        
+
         // Then
         coVerify(exactly = 1) { temaDao.insertarTema(tema) }
     }
@@ -119,10 +119,10 @@ class ForoRepositoryTest {
         val tema = Tema(id = 10L, titulo = "Tema Test", contenido = "Contenido Test")
         val temaSlot = slot<Tema>()
         coEvery { temaDao.insertarTema(capture(temaSlot)) } just Runs
-        
+
         // When
         repository.insertarTema(tema)
-        
+
         // Then
         assertEquals(tema.titulo, temaSlot.captured.titulo)
         assertEquals(tema.contenido, temaSlot.captured.contenido)
@@ -133,10 +133,10 @@ class ForoRepositoryTest {
         // Given
         val tema = Tema(id = 7L, titulo = "Tema a Eliminar", contenido = "Contenido")
         coEvery { temaDao.eliminarTema(tema) } just Runs
-        
+
         // When
         repository.eliminarTema(tema)
-        
+
         // Then
         coVerify(exactly = 1) { temaDao.eliminarTema(tema) }
     }
@@ -147,10 +147,10 @@ class ForoRepositoryTest {
         val tema = Tema(id = 15L, titulo = "Tema Delete", contenido = "Delete Content")
         val temaSlot = slot<Tema>()
         coEvery { temaDao.eliminarTema(capture(temaSlot)) } just Runs
-        
+
         // When
         repository.eliminarTema(tema)
-        
+
         // Then
         assertEquals(tema.id, temaSlot.captured.id)
         assertEquals(tema.titulo, temaSlot.captured.titulo)
