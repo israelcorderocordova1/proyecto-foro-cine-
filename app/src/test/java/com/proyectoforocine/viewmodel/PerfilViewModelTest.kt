@@ -30,10 +30,10 @@ class PerfilViewModelTest {
     fun setup() {
         Dispatchers.setMain(testDispatcher)
         application = mockk(relaxed = true)
-        
+
         // Simular constructor de UserPreferencesRepository
         mockkConstructor(UserPreferencesRepository::class)
-        
+
         every { anyConstructed<UserPreferencesRepository>().userProfile } returns flowOf(
             UserProfile(
                 nombre = "Usuario Test",
@@ -42,12 +42,12 @@ class PerfilViewModelTest {
                 recibirNotificaciones = true
             )
         )
-        
+
         coEvery { anyConstructed<UserPreferencesRepository>().saveUserName(any()) } just Runs
         coEvery { anyConstructed<UserPreferencesRepository>().saveUserPhoto(any()) } just Runs
         coEvery { anyConstructed<UserPreferencesRepository>().saveDarkMode(any()) } just Runs
         coEvery { anyConstructed<UserPreferencesRepository>().saveNotificationsEnabled(any()) } just Runs
-        
+
         viewModel = PerfilViewModel(application)
     }
 
@@ -61,7 +61,7 @@ class PerfilViewModelTest {
     fun `initial state should load from UserPreferencesRepository`() = runTest {
         // Dado - ViewModel inicializado
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Entonces - userProfile cargado
         val profile = viewModel.userProfile.value
         assertEquals("Usuario Test", profile.nombre)
@@ -75,11 +75,11 @@ class PerfilViewModelTest {
         // Dado
         val newName = "Nuevo Nombre"
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Cuando
         viewModel.onNombreChange(newName)
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Entonces
         coVerify { anyConstructed<UserPreferencesRepository>().saveUserName(newName) }
     }
@@ -90,11 +90,11 @@ class PerfilViewModelTest {
         val uri = mockk<Uri>()
         every { uri.toString() } returns "content://test/photo.jpg"
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Cuando
         viewModel.onFotoSeleccionada(uri)
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Entonces
         coVerify { anyConstructed<UserPreferencesRepository>().saveUserPhoto("content://test/photo.jpg") }
     }
@@ -103,11 +103,11 @@ class PerfilViewModelTest {
     fun `onFotoSeleccionada should call repository saveUserPhoto with null`() = runTest {
         // Dado
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Cuando
         viewModel.onFotoSeleccionada(null)
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Entonces
         coVerify { anyConstructed<UserPreferencesRepository>().saveUserPhoto(null) }
     }
@@ -116,11 +116,11 @@ class PerfilViewModelTest {
     fun `onModoOscuroToggle should call repository saveDarkMode with true`() = runTest {
         // Dado
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Cuando
         viewModel.onModoOscuroToggle(true)
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Entonces
         coVerify { anyConstructed<UserPreferencesRepository>().saveDarkMode(true) }
     }
@@ -129,11 +129,11 @@ class PerfilViewModelTest {
     fun `onModoOscuroToggle should call repository saveDarkMode with false`() = runTest {
         // Dado
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Cuando
         viewModel.onModoOscuroToggle(false)
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Entonces
         coVerify { anyConstructed<UserPreferencesRepository>().saveDarkMode(false) }
     }
@@ -142,11 +142,11 @@ class PerfilViewModelTest {
     fun `onNotificacionesToggle should call repository saveNotificationsEnabled`() = runTest {
         // Dado
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Cuando
         viewModel.onNotificacionesToggle(false)
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Entonces
         coVerify { anyConstructed<UserPreferencesRepository>().saveNotificationsEnabled(false) }
     }
@@ -156,11 +156,11 @@ class PerfilViewModelTest {
         // Given
         testDispatcher.scheduler.advanceUntilIdle()
         assertFalse(viewModel.uiState.value.showImageSourceDialog)
-        
+
         // When
         viewModel.onShowImageSourceDialog()
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Then
         assertTrue(viewModel.uiState.value.showImageSourceDialog)
     }
@@ -171,11 +171,11 @@ class PerfilViewModelTest {
         viewModel.onShowImageSourceDialog()
         testDispatcher.scheduler.advanceUntilIdle()
         assertTrue(viewModel.uiState.value.showImageSourceDialog)
-        
+
         // When
         viewModel.onHideImageSourceDialog()
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Then
         assertFalse(viewModel.uiState.value.showImageSourceDialog)
     }

@@ -34,7 +34,7 @@ class UserPreferencesRepositoryTest {
     fun configuracion() {
         Dispatchers.setMain(testDispatcher)
         context = mockk(relaxed = true)
-        
+
         // Nota: UserPreferencesRepository requiere DataStore real para tests completos
         // Estos tests verifican la estructura de la clase
     }
@@ -50,9 +50,15 @@ class UserPreferencesRepositoryTest {
         // Verificar que las claves estáticas existen
         assertNotNull("USER_ROLE_KEY debe existir", UserPreferencesRepository.USER_ROLE_KEY)
         assertNotNull("USER_NAME_KEY debe existir", UserPreferencesRepository.USER_NAME_KEY)
-        assertNotNull("USER_PHOTO_URI_KEY debe existir", UserPreferencesRepository.USER_PHOTO_URI_KEY)
+        assertNotNull(
+            "USER_PHOTO_URI_KEY debe existir",
+            UserPreferencesRepository.USER_PHOTO_URI_KEY
+        )
         assertNotNull("DARK_MODE_KEY debe existir", UserPreferencesRepository.DARK_MODE_KEY)
-        assertNotNull("NOTIFICATIONS_ENABLED_KEY debe existir", UserPreferencesRepository.NOTIFICATIONS_ENABLED_KEY)
+        assertNotNull(
+            "NOTIFICATIONS_ENABLED_KEY debe existir",
+            UserPreferencesRepository.NOTIFICATIONS_ENABLED_KEY
+        )
     }
 
     @Test
@@ -62,7 +68,10 @@ class UserPreferencesRepositoryTest {
         assertEquals("user_name", UserPreferencesRepository.USER_NAME_KEY.name)
         assertEquals("user_photo_uri", UserPreferencesRepository.USER_PHOTO_URI_KEY.name)
         assertEquals("dark_mode", UserPreferencesRepository.DARK_MODE_KEY.name)
-        assertEquals("notifications_enabled", UserPreferencesRepository.NOTIFICATIONS_ENABLED_KEY.name)
+        assertEquals(
+            "notifications_enabled",
+            UserPreferencesRepository.NOTIFICATIONS_ENABLED_KEY.name
+        )
     }
 
     @Test
@@ -77,12 +86,15 @@ class UserPreferencesRepositoryTest {
         // Verificar que los métodos existen mediante reflection
         val repositoryClass = UserPreferencesRepository::class.java
         val methods = repositoryClass.declaredMethods.map { it.name }
-        
+
         assertTrue("Debe tener saveUserRole", methods.contains("saveUserRole"))
         assertTrue("Debe tener saveUserName", methods.contains("saveUserName"))
         assertTrue("Debe tener saveUserPhoto", methods.contains("saveUserPhoto"))
         assertTrue("Debe tener saveDarkMode", methods.contains("saveDarkMode"))
-        assertTrue("Debe tener saveNotificationsEnabled", methods.contains("saveNotificationsEnabled"))
+        assertTrue(
+            "Debe tener saveNotificationsEnabled",
+            methods.contains("saveNotificationsEnabled")
+        )
         assertTrue("Debe tener saveUserProfile", methods.contains("saveUserProfile"))
     }
 
@@ -91,7 +103,7 @@ class UserPreferencesRepositoryTest {
         // Verificar que los campos de Flow existen
         val repositoryClass = UserPreferencesRepository::class.java
         val fields = repositoryClass.declaredFields.map { it.name }
-        
+
         assertTrue("Debe tener userProfile flow", fields.contains("userProfile"))
         assertTrue("Debe tener userRole flow", fields.contains("userRole"))
     }

@@ -41,11 +41,11 @@ class CrearTemaViewModelTest {
         val titulo = "Mi título de prueba"
         val contenido = "Mi contenido de prueba"
         val temaSlot = slot<Tema>()
-        
+
         // Cuando
         viewModel.insertarTema(titulo, contenido)
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Entonces
         coVerify { repository.insertarTema(capture(temaSlot)) }
         assert(temaSlot.captured.titulo == titulo)
@@ -57,11 +57,11 @@ class CrearTemaViewModelTest {
         // Dado
         val titulo = "Título"
         val contenido = "Contenido"
-        
+
         // Cuando
         viewModel.insertarTema(titulo, contenido)
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Entonces
         coVerify(exactly = 1) { repository.insertarTema(any()) }
     }
@@ -71,14 +71,16 @@ class CrearTemaViewModelTest {
         // Dado
         val titulo = ""
         val contenido = ""
-        
+
         // Cuando
         viewModel.insertarTema(titulo, contenido)
         testDispatcher.scheduler.advanceUntilIdle()
-        
+
         // Entonces
-        coVerify { repository.insertarTema(match { 
-            it.titulo.isEmpty() && it.contenido.isEmpty() 
-        }) }
+        coVerify {
+            repository.insertarTema(match {
+                it.titulo.isEmpty() && it.contenido.isEmpty()
+            })
+        }
     }
 }
