@@ -17,15 +17,10 @@ class CrearTemaScreenTest {
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     @Test
-    fun activityLaunchesWithComposeContent() {
-        composeTestRule.waitForIdle()
-        Thread.sleep(2000)
-
-        // Log the compose tree for debugging
-        composeTestRule.onRoot().printToLog("COMPOSE_TREE")
-
-        // Verify compose hierarchy exists
-        composeTestRule.onRoot().assertExists()
+    fun activityArrancaYComposeExiste() {
+        // Verifica que el árbol Compose está presente y el NavHost inicial existe
+        composeTestRule.onRoot().assertIsDisplayed()
+        composeTestRule.onNodeWithTag("navHostRoot").assertIsDisplayed()
     }
 
     @Test
