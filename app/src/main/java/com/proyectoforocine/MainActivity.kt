@@ -28,8 +28,6 @@ import com.proyectoforocine.view.PerfilScreen
 import com.proyectoforocine.viewmodel.ForoViewModel
 import com.proyectoforocine.viewmodel.ForoViewModelFactory
 import com.proyectoforocine.viewmodel.PerfilViewModel
-import com.proyectoforocine.ForoApplication
-import com.proyectoforocine.utils.resolverDestinoInicial
 
 class MainActivity : ComponentActivity() {
 

@@ -3,9 +3,13 @@ package com.proyectoforocine.repository
 import com.proyectoforocine.model.TemaForo
 import com.proyectoforocine.model.Usuario
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.junit.Assert.*
 
 /**
  * Pruebas unitarias para ForoRepository (Singleton)

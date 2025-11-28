@@ -1,18 +1,16 @@
 package com.proyectoforocine.data.local
 
+// --- CORRECCIÓN CLAVE ---
+// La ruta de importación debe apuntar a donde realmente está tu clase Tema.
+// Como está en el mismo paquete ('data.local'), no necesitamos un import específico,
+// pero por claridad, vamos a corregir el que teníamos.
+// Si tu archivo Tema.kt está en 'data/local', el import sería:
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-
-// --- CORRECCIÓN CLAVE ---
-// La ruta de importación debe apuntar a donde realmente está tu clase Tema.
-// Como está en el mismo paquete ('data.local'), no necesitamos un import específico,
-// pero por claridad, vamos a corregir el que teníamos.
-// Si tu archivo Tema.kt está en 'data/local', el import sería:
-import com.proyectoforocine.data.local.Tema // ¡Esta es la ruta correcta!
 
 @Dao
 interface TemaDao {

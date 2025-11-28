@@ -2,9 +2,14 @@ package com.proyectoforocine.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.proyectoforocine.data.ForoRepository // Asegúrate de que este import es correcto
+import com.proyectoforocine.data.ForoRepository
 import com.proyectoforocine.data.local.Tema
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 // Define el estado de la UI para la pantalla de creación
