@@ -1,16 +1,32 @@
 package com.proyectoforocine
 
-// C:/Users/Israel/Desktop/proyecto foro cine/app/src/main/java/com/proyectoforocine/ForoDeCineApplication.kt
-
-
-
 import android.app.Application
-import com.proyectoforocine.data.local.ForoDeCineDatabase
-import com.proyectoforocine.data.local.TemaRepository
+import androidx.room.Room
+import com.proyectoforocine.data.ForoRepository
+import com.proyectoforocine.data.datastore.SessionManager
+import com.proyectoforocine.data.local.AppDatabase
 
 class ForoDeCineApplication : Application() {
-    // Usando 'lazy' para que la base de datos y el repositorio
+
+    // Instancia de DataStore para la sesión
+    val sessionManager: SessionManager by lazy {
+        SessionManager(this)
+    }
+
+    // Usamos 'lazy' para que la base de datos y el repositorio
     // solo se creen cuando se necesiten por primera vez.
-    val database by lazy { ForoDeCineDatabase.getDatabase(this) }
-    val repository by lazy { TemaRepository(database.temaDao()) }
+    val database: AppDatabase by lazy {
+        Room.databaseBuilder(
+            this,
+            AppDatabase::class.java,
+            "foro-db"
+        )
+        .fallbackToDestructiveMigration() // ¡Importante para desarrollo!
+        .build()
+    }
+
+    // El repositorio se crea usando los DAOs de la instancia de la base de datos.
+    val repository: ForoRepository by lazy {
+        ForoRepository(database.temaDao(), database.usuarioDao())
+    }
 }
