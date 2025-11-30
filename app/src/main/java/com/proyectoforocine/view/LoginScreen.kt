@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.proyectoforocine.ui.theme.ProyectoForoCineTheme
@@ -49,7 +50,7 @@ fun LoginScreen(
                 value = uiState.email,
                 onValueChange = onEmailChange,
                 label = { Text("Correo electrónico") },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().testTag("emailField"),
                 isError = uiState.emailError != null,
                 supportingText = { 
                     if (uiState.emailError != null) {
@@ -63,7 +64,7 @@ fun LoginScreen(
                 onValueChange = onPasswordChange,
                 label = { Text("Contraseña") },
                 visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().testTag("passwordField"),
                 isError = uiState.passwordError != null,
                 supportingText = { 
                     if (uiState.passwordError != null) {
@@ -72,7 +73,7 @@ fun LoginScreen(
                 }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = onLoginClick, modifier = Modifier.fillMaxWidth()) {
+            Button(onClick = onLoginClick, modifier = Modifier.fillMaxWidth().testTag("loginUserButton")) {
                 Text("Iniciar Sesión")
             }
             if (uiState.loginError != null) {
@@ -80,7 +81,7 @@ fun LoginScreen(
                 Text(uiState.loginError, color = MaterialTheme.colorScheme.error)
             }
             Spacer(modifier = Modifier.height(16.dp))
-            TextButton(onClick = onNavigateToRegister) {
+            TextButton(onClick = onNavigateToRegister, modifier = Modifier.testTag("loginModeratorButton")) {
                 Text("¿No tienes cuenta? Regístrate")
             }
             Spacer(modifier = Modifier.height(8.dp))
