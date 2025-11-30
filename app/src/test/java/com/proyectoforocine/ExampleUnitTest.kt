@@ -1,8 +1,7 @@
 package com.proyectoforocine
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Ejemplo de test unitario local, que se ejecutará en la máquina de desarrollo (host).

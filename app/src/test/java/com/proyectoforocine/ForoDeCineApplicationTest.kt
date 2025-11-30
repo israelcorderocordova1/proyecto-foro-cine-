@@ -1,7 +1,7 @@
 package com.proyectoforocine
 
+import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.junit.Assert.*
 
 /**
  * Pruebas unitarias para ForoDeCineApplication

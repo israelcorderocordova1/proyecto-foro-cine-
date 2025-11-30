@@ -2,19 +2,20 @@ package com.proyectoforocine.data
 
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.*
-import com.proyectoforocine.model.UserProfile
-import io.mockk.*
+import io.mockk.clearAllMocks
+import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.*
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.Assert.*
 
 /**
  * Pruebas unitarias simplificadas para UserPreferencesRepository

@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,29 +24,25 @@ import androidx.compose.ui.unit.dp
 import com.proyectoforocine.data.local.Tema
 import com.proyectoforocine.ui.theme.ProyectoForoCineTheme
 
-/**
- * Pantalla que muestra la lista de temas.
- * Es una pantalla "tonta" (stateless). No tiene su propio ViewModel.
- * Recibe la lista de temas y los eventos (clicks) desde el exterior.
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListaTemasScreen(
     temas: List<Tema>,
     onTemaClick: (Tema) -> Unit,
     onAddTemaClick: () -> Unit,
-    onPerfilClick: () -> Unit = {}
+    onPerfilClick: () -> Unit,
+    onLogoutClick: () -> Unit // Nuevo parámetro para cerrar sesión
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Bienvenido a nuestro Foro de Cine") },
+                title = { Text("Foro de Cine") },
                 actions = {
                     IconButton(onClick = onPerfilClick) {
-                        Icon(
-                            imageVector = Icons.Default.AccountCircle,
-                            contentDescription = "Mi Perfil"
-                        )
+                        Icon(Icons.Default.AccountCircle, contentDescription = "Mi Perfil")
+                    }
+                    IconButton(onClick = onLogoutClick) {
+                        Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = "Cerrar Sesión")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -60,37 +57,43 @@ fun ListaTemasScreen(
             }
         }
     ) { paddingValues ->
-        if (temas.isEmpty()) {
-            Box(
-                modifier = Modifier.fillMaxSize().padding(paddingValues).padding(16.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Aún no hay temas. ¡Sé el primero en crear uno!",
-                    style = MaterialTheme.typography.bodyLarge,
-                    textAlign = TextAlign.Center
+        ListaTemasScreenContent(temas = temas, onTemaClick = onTemaClick, contentPadding = paddingValues)
+    }
+}
+
+@Composable
+fun ListaTemasScreenContent(
+    temas: List<Tema>,
+    onTemaClick: (Tema) -> Unit,
+    contentPadding: PaddingValues
+) {
+    if (temas.isEmpty()) {
+        Box(
+            modifier = Modifier.fillMaxSize().padding(contentPadding).padding(16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Aún no hay temas. ¡Sé el primero en crear uno!",
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center
+            )
+        }
+    } else {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize().padding(contentPadding),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(temas) { tema ->
+                TemaItem(
+                    tema = tema,
+                    onItemClick = { onTemaClick(tema) }
                 )
-            }
-        } else {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize().padding(paddingValues),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(temas) { tema ->
-                    TemaItem(
-                        tema = tema,
-                        onItemClick = { onTemaClick(tema) }
-                    )
-                }
             }
         }
     }
 }
 
-/**
- * Composable para cada elemento individual en la lista de temas.
- */
 @Composable
 fun TemaItem(
     tema: Tema,
@@ -120,10 +123,16 @@ fun TemaItem(
 fun ListaTemasScreenPreview() {
     ProyectoForoCineTheme {
         val sampleTemas = listOf(
-            Tema(id = 1, titulo = "Review de Dune 2", contenido = "Una obra maestra de la ciencia ficción..."),
-            Tema(id = 2, titulo = "Peliculas sobrevaloradas?", contenido = "Abro debate: El Padrino está sobrevalorada.")
+            Tema(id = 1, titulo = "Review de Dune 2", contenido = "Una obra maestra de la ciencia ficción...", authorId = 1L),
+            Tema(id = 2, titulo = "Peliculas sobrevaloradas?", contenido = "Abro debate: El Padrino está sobrevalorada.", authorId = 1L)
         )
-        ListaTemasScreen(temas = sampleTemas, onTemaClick = {}, onAddTemaClick = {}, onPerfilClick = {})
+        ListaTemasScreen(
+            temas = sampleTemas, 
+            onTemaClick = {}, 
+            onAddTemaClick = {}, 
+            onPerfilClick = {},
+            onLogoutClick = {}
+        )
     }
 }
 
@@ -131,6 +140,6 @@ fun ListaTemasScreenPreview() {
 @Composable
 fun ListaTemasScreenEmptyPreview() {
     ProyectoForoCineTheme {
-        ListaTemasScreen(temas = emptyList(), onTemaClick = {}, onAddTemaClick = {}, onPerfilClick = {})
+        ListaTemasScreen(temas = emptyList(), onTemaClick = {}, onAddTemaClick = {}, onPerfilClick = {}, onLogoutClick = {})
     }
 }

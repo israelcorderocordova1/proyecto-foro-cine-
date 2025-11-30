@@ -1,12 +1,10 @@
 package com.proyectoforocine.viewmodel // <- AÑADIDO: El paquete es importante
 
+// --- CORRECCIÓN CLAVE ---
+// Importa la clase ForoViewModel para que pueda ser utilizada en este archivo.
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.proyectoforocine.data.ForoRepository
-
-// --- CORRECCIÓN CLAVE ---
-// Importa la clase ForoViewModel para que pueda ser utilizada en este archivo.
-import com.proyectoforocine.viewmodel.ForoViewModel
 
 /**
  * Factory (fábrica) para crear instancias de ForoViewModel.

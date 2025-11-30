@@ -1,7 +1,5 @@
 package com.proyectoforocine.model
 
-import android.net.Uri
-
 /**
  * Modelo de datos para el perfil del usuario
  */
