@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val perfilUiState by perfilViewModel.uiState.collectAsState()
-            val modoOscuro = perfilUiState.usuario?.let { false } ?: false // TODO: Conectar al modo oscuro del usuario
+            val modoOscuro = perfilUiState.profile.modoOscuro
 
             ProyectoForoCineTheme(darkTheme = modoOscuro) {
                 Surface(
@@ -189,7 +189,12 @@ class MainActivity : ComponentActivity() {
                                     PerfilScreen(
                                         uiState = state,
                                         onNavigateBack = { navController.popBackStack() },
-                                        onMisTemasClick = { navController.navigate("mis_temas") }
+                                        onMisTemasClick = { navController.navigate("mis_temas") },
+                                        onFotoSeleccionada = perfilViewModel::onFotoSeleccionada,
+                                        onModoOscuroToggle = perfilViewModel::onModoOscuroToggle,
+                                        onNotificacionesToggle = perfilViewModel::onNotificacionesToggle,
+                                        onShowImageSourceDialog = perfilViewModel::onShowImageSourceDialog,
+                                        onHideImageSourceDialog = perfilViewModel::onHideImageSourceDialog
                                     )
                                 }
                             }
