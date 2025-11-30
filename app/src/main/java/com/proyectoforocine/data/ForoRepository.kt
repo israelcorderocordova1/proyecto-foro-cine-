@@ -2,8 +2,8 @@ package com.proyectoforocine.data
 
 import com.proyectoforocine.data.local.Tema
 import com.proyectoforocine.data.local.TemaDao
-import com.proyectoforocine.data.local.UsuarioEntity
 import com.proyectoforocine.data.local.UsuarioDao
+import com.proyectoforocine.data.local.UsuarioEntity
 import kotlinx.coroutines.flow.Flow
 
 class ForoRepository(private val temaDao: TemaDao, private val usuarioDao: UsuarioDao) {

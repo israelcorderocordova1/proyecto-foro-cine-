@@ -1,7 +1,6 @@
 package com.proyectoforocine
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -21,12 +20,24 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.proyectoforocine.ForoApplication
 import com.proyectoforocine.model.TemaForo
 import com.proyectoforocine.model.Usuario
 import com.proyectoforocine.ui.theme.ProyectoForoCineTheme
-import com.proyectoforocine.view.*
-import com.proyectoforocine.viewmodel.*
+import com.proyectoforocine.view.CrearTemaScreen
+import com.proyectoforocine.view.DetalleTemaScreen
+import com.proyectoforocine.view.ForgotPasswordScreen
+import com.proyectoforocine.view.ListaTemasScreen
+import com.proyectoforocine.view.LoginScreen
+import com.proyectoforocine.view.MisTemasScreen
+import com.proyectoforocine.view.PerfilScreen
+import com.proyectoforocine.view.RegisterScreen
+import com.proyectoforocine.viewmodel.AuthEvent
+import com.proyectoforocine.viewmodel.AuthViewModel
+import com.proyectoforocine.viewmodel.AuthViewModelFactory
+import com.proyectoforocine.viewmodel.ForoViewModel
+import com.proyectoforocine.viewmodel.ForoViewModelFactory
+import com.proyectoforocine.viewmodel.PerfilViewModel
+import com.proyectoforocine.viewmodel.PerfilViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
