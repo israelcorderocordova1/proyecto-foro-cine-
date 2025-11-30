@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -17,7 +18,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -53,7 +53,7 @@ fun LoginScreen(
                 isError = uiState.emailError != null,
                 supportingText = { 
                     if (uiState.emailError != null) {
-                        Text(uiState.emailError, color = Color.Red)
+                        Text(uiState.emailError, color = MaterialTheme.colorScheme.error)
                     }
                 }
             )
@@ -67,7 +67,7 @@ fun LoginScreen(
                 isError = uiState.passwordError != null,
                 supportingText = { 
                     if (uiState.passwordError != null) {
-                        Text(uiState.passwordError, color = Color.Red)
+                        Text(uiState.passwordError, color = MaterialTheme.colorScheme.error)
                     }
                 }
             )
@@ -77,7 +77,7 @@ fun LoginScreen(
             }
             if (uiState.loginError != null) {
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(uiState.loginError, color = Color.Red)
+                Text(uiState.loginError, color = MaterialTheme.colorScheme.error)
             }
             Spacer(modifier = Modifier.height(16.dp))
             TextButton(onClick = onNavigateToRegister) {

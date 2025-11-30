@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -20,7 +21,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -66,7 +66,7 @@ fun RegisterScreen(
                 isError = uiState.usernameError != null,
                 supportingText = {
                     if (uiState.usernameError != null) {
-                        Text(uiState.usernameError, color = Color.Red)
+                        Text(uiState.usernameError, color = MaterialTheme.colorScheme.error)
                     }
                 }
             )
@@ -79,7 +79,7 @@ fun RegisterScreen(
                 isError = uiState.emailError != null,
                 supportingText = {
                     if (uiState.emailError != null) {
-                        Text(uiState.emailError, color = Color.Red)
+                        Text(uiState.emailError, color = MaterialTheme.colorScheme.error)
                     }
                 }
             )
@@ -93,7 +93,7 @@ fun RegisterScreen(
                 isError = uiState.passwordError != null,
                 supportingText = {
                     if (uiState.passwordError != null) {
-                        Text(uiState.passwordError, color = Color.Red)
+                        Text(uiState.passwordError, color = MaterialTheme.colorScheme.error)
                     }
                 }
             )
@@ -106,7 +106,7 @@ fun RegisterScreen(
             }
             if (uiState.registrationError != null) {
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(uiState.registrationError, color = Color.Red)
+                Text(uiState.registrationError, color = MaterialTheme.colorScheme.error)
             }
         }
     }
