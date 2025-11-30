@@ -22,7 +22,9 @@ import java.io.IOException
 @RunWith(AndroidJUnit4::class)
 class DataStoreFailureTest {
 
-    private val Context.testDataStore by preferencesDataStore(name = "test_preferences")
+    // Usa un nombre único por ejecución para evitar múltiples instancias sobre el mismo archivo
+    private val uniqueName = "test_preferences_" + System.currentTimeMillis()
+    private val Context.testDataStore by preferencesDataStore(name = uniqueName)
     private lateinit var context: Context
 
     @Before

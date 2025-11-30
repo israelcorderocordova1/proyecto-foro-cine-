@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.proyectoforocine.ui.theme.ProyectoForoCineTheme
@@ -59,7 +60,7 @@ fun CrearTemaScreen(
                 value = uiState.titulo,
                 onValueChange = onTituloChange,
                 label = { Text("Agrega un Título") },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().testTag("tituloField"),
                 // --- CORRECCIÓN AQUÍ ---
                 isError = uiState.error != null,
                 singleLine = true
@@ -84,13 +85,14 @@ fun CrearTemaScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
+                    .testTag("contenidoField")
             )
 
             Spacer(modifier = Modifier.height(24.dp))
 
             Button(
                 onClick = onPublicarClick,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().testTag("publicarButton")
             ) {
                 Text("Compartelo al Foro")
             }

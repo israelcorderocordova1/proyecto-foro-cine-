@@ -115,7 +115,7 @@ class ForoViewModelTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         // When
-        val result = viewModel.validarYCrearTema()
+        val result = viewModel.validarYCrearTema(authorId = 1L)
         testDispatcher.scheduler.advanceUntilIdle()
 
         // Then
@@ -135,7 +135,7 @@ class ForoViewModelTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         // When
-        val result = viewModel.validarYCrearTema()
+        val result = viewModel.validarYCrearTema(authorId = 1L)
         testDispatcher.scheduler.advanceUntilIdle()
 
         // Then
@@ -153,19 +153,20 @@ class ForoViewModelTest {
             // Given
             val titulo = "Título válido"
             val contenido = "Contenido válido"
+            val authorId = 1L
             viewModel.onTituloChange(titulo)
             viewModel.onContenidoChange(contenido)
             testDispatcher.scheduler.advanceUntilIdle()
 
             // When
-            val result = viewModel.validarYCrearTema()
+            val result = viewModel.validarYCrearTema(authorId = authorId)
             testDispatcher.scheduler.advanceUntilIdle()
 
             // Then
             assertTrue(result)
             coVerify {
                 repository.insertarTema(match {
-                    it.titulo == titulo && it.contenido == contenido
+                    it.titulo == titulo && it.contenido == contenido && it.authorId == authorId
                 })
             }
         }
@@ -178,7 +179,7 @@ class ForoViewModelTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         // When
-        viewModel.validarYCrearTema()
+        viewModel.validarYCrearTema(authorId = 1L)
         testDispatcher.scheduler.advanceUntilIdle()
 
         // Entonces - El estado debe reiniciarse
@@ -191,7 +192,7 @@ class ForoViewModelTest {
     fun `seleccionarTema should update temaSeleccionado state`() = runTest {
         // Given
         val temaId = 1L
-        val tema = Tema(id = temaId, titulo = "Tema Test", contenido = "Contenido Test")
+        val tema = Tema(id = temaId, titulo = "Tema Test", contenido = "Contenido Test", authorId = 1L)
         every { repository.obtenerTemaPorId(temaId) } returns flowOf(tema)
 
         // When
@@ -206,7 +207,7 @@ class ForoViewModelTest {
     @Test
     fun `eliminarTema should call repository eliminarTema`() = runTest {
         // Given
-        val tema = Tema(id = 1L, titulo = "Tema a eliminar", contenido = "Contenido")
+        val tema = Tema(id = 1L, titulo = "Tema a eliminar", contenido = "Contenido", authorId = 1L)
 
         // When
         viewModel.eliminarTema(tema)

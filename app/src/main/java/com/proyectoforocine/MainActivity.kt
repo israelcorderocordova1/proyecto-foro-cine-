@@ -15,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -64,7 +65,11 @@ class MainActivity : ComponentActivity() {
                     } else {
                         val startDestination = if (currentUserId != null) "lista_temas" else "login"
 
-                        NavHost(navController = navController, startDestination = startDestination) {
+                        NavHost(
+                            navController = navController,
+                            startDestination = startDestination,
+                            modifier = Modifier.testTag("navHostRoot")
+                        ) {
 
                             composable("login") {
                                 val loginState by authViewModel.loginUiState.collectAsState()

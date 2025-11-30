@@ -3,6 +3,7 @@ package com.proyectoforocine.data
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.proyectoforocine.data.local.Tema
 import com.proyectoforocine.data.local.TemaDao
+import com.proyectoforocine.data.local.UsuarioDao
 import io.mockk.Runs
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
@@ -35,6 +36,7 @@ class ForoRepositoryTest {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var temaDao: TemaDao
+    private lateinit var usuarioDao: UsuarioDao
     private lateinit var repository: ForoRepository
     private val testDispatcher = StandardTestDispatcher()
 
@@ -42,7 +44,8 @@ class ForoRepositoryTest {
     fun setup() {
         Dispatchers.setMain(testDispatcher)
         temaDao = mockk(relaxed = true)
-        repository = ForoRepository(temaDao)
+        usuarioDao = mockk(relaxed = true)
+        repository = ForoRepository(temaDao, usuarioDao)
     }
 
     @After
@@ -55,14 +58,14 @@ class ForoRepositoryTest {
     fun `todosLosTemas flow should emit data from DAO`() = runTest {
         // Dado
         val temasList = listOf(
-            Tema(id = 1L, titulo = "Tema 1", contenido = "Contenido 1"),
-            Tema(id = 2L, titulo = "Tema 2", contenido = "Contenido 2"),
-            Tema(id = 3L, titulo = "Tema 3", contenido = "Contenido 3")
+            Tema(id = 1L, titulo = "Tema 1", contenido = "Contenido 1", authorId = 1L),
+            Tema(id = 2L, titulo = "Tema 2", contenido = "Contenido 2", authorId = 1L),
+            Tema(id = 3L, titulo = "Tema 3", contenido = "Contenido 3", authorId = 1L)
         )
         every { temaDao.obtenerTodosLosTemas() } returns flowOf(temasList)
 
         // Cuando
-        val newRepository = ForoRepository(temaDao)
+        val newRepository = ForoRepository(temaDao, usuarioDao)
         val result = newRepository.todosLosTemas.first()
 
         // Entonces
@@ -77,7 +80,7 @@ class ForoRepositoryTest {
         every { temaDao.obtenerTodosLosTemas() } returns flowOf(emptyList())
 
         // Cuando
-        val newRepository = ForoRepository(temaDao)
+        val newRepository = ForoRepository(temaDao, usuarioDao)
         val result = newRepository.todosLosTemas.first()
 
         // Entonces
@@ -88,7 +91,7 @@ class ForoRepositoryTest {
     fun `obtenerTemaPorId should return correct Flow from DAO`() = runTest {
         // Dado
         val temaId = 5L
-        val tema = Tema(id = temaId, titulo = "Tema Específico", contenido = "Contenido Específico")
+        val tema = Tema(id = temaId, titulo = "Tema Específico", contenido = "Contenido Específico", authorId = 1L)
         every { temaDao.obtenerTemaPorId(temaId) } returns flowOf(tema)
 
         // Cuando
@@ -116,7 +119,7 @@ class ForoRepositoryTest {
     @Test
     fun `insertarTema should call DAO insertarTema`() = runTest {
         // Given
-        val tema = Tema(titulo = "Nuevo Tema", contenido = "Nuevo Contenido")
+        val tema = Tema(titulo = "Nuevo Tema", contenido = "Nuevo Contenido", authorId = 1L)
         coEvery { temaDao.insertarTema(tema) } just Runs
 
         // When
@@ -129,7 +132,7 @@ class ForoRepositoryTest {
     @Test
     fun `insertarTema should pass correct tema object to DAO`() = runTest {
         // Given
-        val tema = Tema(id = 10L, titulo = "Tema Test", contenido = "Contenido Test")
+        val tema = Tema(id = 10L, titulo = "Tema Test", contenido = "Contenido Test", authorId = 1L)
         val temaSlot = slot<Tema>()
         coEvery { temaDao.insertarTema(capture(temaSlot)) } just Runs
 
@@ -144,7 +147,7 @@ class ForoRepositoryTest {
     @Test
     fun `eliminarTema should call DAO eliminarTema`() = runTest {
         // Given
-        val tema = Tema(id = 7L, titulo = "Tema a Eliminar", contenido = "Contenido")
+        val tema = Tema(id = 7L, titulo = "Tema a Eliminar", contenido = "Contenido", authorId = 1L)
         coEvery { temaDao.eliminarTema(tema) } just Runs
 
         // When
@@ -157,7 +160,7 @@ class ForoRepositoryTest {
     @Test
     fun `eliminarTema should pass correct tema object to DAO`() = runTest {
         // Given
-        val tema = Tema(id = 15L, titulo = "Tema Delete", contenido = "Delete Content")
+        val tema = Tema(id = 15L, titulo = "Tema Delete", contenido = "Delete Content", authorId = 1L)
         val temaSlot = slot<Tema>()
         coEvery { temaDao.eliminarTema(capture(temaSlot)) } just Runs
 
