@@ -10,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,20 +38,31 @@ fun DetalleTemaScreen(
             )
         }
     ) { paddingValues ->
-        tema?.let {
+        // Comprobamos si el tema es nulo para mostrar un indicador de carga
+        if (tema == null) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator() // Muestra un indicador de carga mientras el tema es nulo
+            }
+        } else {
+            // Si el tema no es nulo, mostramos los detalles
             Column(
                 modifier = Modifier
                     .padding(paddingValues)
                     .padding(16.dp)
                     .fillMaxSize()
             ) {
-                Text(it.titulo, style = MaterialTheme.typography.headlineSmall)
-                Text("por ${it.autor.nombre}", style = MaterialTheme.typography.bodyMedium)
+                Text(tema.titulo, style = MaterialTheme.typography.headlineSmall)
+                Text("por ${tema.autor.nombre}", style = MaterialTheme.typography.bodyMedium)
                 Divider(modifier = Modifier.padding(vertical = 8.dp))
-                Text(it.contenido, style = MaterialTheme.typography.bodyLarge)
+                Text(tema.contenido, style = MaterialTheme.typography.bodyLarge)
 
-                Spacer(modifier = Modifier.weight(1f)) // Empuja el botón hacia abajo
+                Spacer(modifier = Modifier.weight(1f)) // Empuja el contenido siguiente hacia abajo
 
+                // --- LÓGICA DEL MODERADOR ---
+                // Solo muestra el botón si el rol del usuario es "moderador"
                 if (rol == "moderador") {
                     Button(
                         onClick = onDeleteTema,
@@ -63,18 +73,15 @@ fun DetalleTemaScreen(
                     }
                 }
             }
-        } ?: Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator() // Muestra un indicador de carga
         }
     }
 }
 
-// --- Previews ---
 
-val sampleTemaDetalle = TemaForo(
+// --- Previews ---
+// (Estas vistas previas te permiten ver cómo se comporta la UI sin ejecutar la app)
+
+private val sampleTemaDetalle = TemaForo(
     id = 1L,
     titulo = "Título del Tema en Detalle",
     contenido = "Este es el contenido completo del tema. A diferencia de la tarjeta, aquí se muestra todo el texto, sin importar qué tan largo sea. Esto permite a los usuarios leer toda la discusión y los puntos presentados por el autor original.",
@@ -82,26 +89,26 @@ val sampleTemaDetalle = TemaForo(
     categoria = "Discusión General"
 )
 
-@Preview(showBackground = true, name = "Detalle Tema - Usuario")
+@Preview(showBackground = true, name = "Detalle Tema - Rol Usuario")
 @Composable
 fun DetalleTemaScreenUserPreview() {
     ProyectoForoCineTheme {
         DetalleTemaScreen(
             tema = sampleTemaDetalle,
-            rol = "registrado",
+            rol = "registrado", // El rol es "registrado"
             onNavigateBack = {},
             onDeleteTema = {}
         )
     }
 }
 
-@Preview(showBackground = true, name = "Detalle Tema - Moderador")
+@Preview(showBackground = true, name = "Detalle Tema - Rol Moderador")
 @Composable
 fun DetalleTemaScreenModeradorPreview() {
     ProyectoForoCineTheme {
         DetalleTemaScreen(
             tema = sampleTemaDetalle,
-            rol = "moderador",
+            rol = "moderador", // El rol es "moderador"
             onNavigateBack = {},
             onDeleteTema = {}
         )
@@ -113,7 +120,7 @@ fun DetalleTemaScreenModeradorPreview() {
 fun DetalleTemaScreenLoadingPreview() {
     ProyectoForoCineTheme {
         DetalleTemaScreen(
-            tema = null, // Estado de carga
+            tema = null, // Estado de carga (tema nulo)
             rol = "registrado",
             onNavigateBack = {},
             onDeleteTema = {}

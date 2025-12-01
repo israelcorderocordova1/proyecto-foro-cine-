@@ -1,0 +1,49 @@
+com.proyectoforocine.app-core-runtime-2.2.0-0 C:\Users\Israel\.gradle\caches\8.13\transforms\05ea4fc5541826d4b35cbd4a3abde7d5\transformed\core-runtime-2.2.0\res
+com.proyectoforocine.app-material-release-1 C:\Users\Israel\.gradle\caches\8.13\transforms\0666d73798518c2b7a14755efc9e5162\transformed\material-release\res
+com.proyectoforocine.app-lifecycle-viewmodel-compose-release-2 C:\Users\Israel\.gradle\caches\8.13\transforms\0b99fadf369bd987dc9458ca003c9546\transformed\lifecycle-viewmodel-compose-release\res
+com.proyectoforocine.app-material3-release-3 C:\Users\Israel\.gradle\caches\8.13\transforms\0bcb1f5a294d6a45678a49d139f6bc1b\transformed\material3-release\res
+com.proyectoforocine.app-core-ktx-1.17.0-4 C:\Users\Israel\.gradle\caches\8.13\transforms\15306ee4286a33bba3226b295a9d0e9a\transformed\core-ktx-1.17.0\res
+com.proyectoforocine.app-navigation-runtime-2.7.7-5 C:\Users\Israel\.gradle\caches\8.13\transforms\2d0b074be8031ad32d454ff6b59521f1\transformed\navigation-runtime-2.7.7\res
+com.proyectoforocine.app-activity-compose-1.11.0-6 C:\Users\Israel\.gradle\caches\8.13\transforms\2dbc3205cb9c6e13813a376dcf6e8fc1\transformed\activity-compose-1.11.0\res
+com.proyectoforocine.app-datastore-core-release-7 C:\Users\Israel\.gradle\caches\8.13\transforms\309a8286d7e76d88e111f728aa41fed0\transformed\datastore-core-release\res
+com.proyectoforocine.app-lifecycle-livedata-core-2.9.4-8 C:\Users\Israel\.gradle\caches\8.13\transforms\3b7b174c4f351681bfebcbd27ad46256\transformed\lifecycle-livedata-core-2.9.4\res
+com.proyectoforocine.app-lifecycle-process-2.9.4-9 C:\Users\Israel\.gradle\caches\8.13\transforms\42d46d2d3769705ecebae8c80858c34e\transformed\lifecycle-process-2.9.4\res
+com.proyectoforocine.app-savedstate-compose-release-10 C:\Users\Israel\.gradle\caches\8.13\transforms\516675017afda058c23a3ba7ccd5846a\transformed\savedstate-compose-release\res
+com.proyectoforocine.app-tracing-1.2.0-11 C:\Users\Israel\.gradle\caches\8.13\transforms\626a688c35d645d29604c539ca47eec1\transformed\tracing-1.2.0\res
+com.proyectoforocine.app-lifecycle-runtime-compose-release-12 C:\Users\Israel\.gradle\caches\8.13\transforms\6846212a55fdac589984d4c9cd2a0378\transformed\lifecycle-runtime-compose-release\res
+com.proyectoforocine.app-savedstate-ktx-1.3.1-13 C:\Users\Israel\.gradle\caches\8.13\transforms\6bacc7f3b99e523ae660a1774e338eb4\transformed\savedstate-ktx-1.3.1\res
+com.proyectoforocine.app-activity-1.11.0-14 C:\Users\Israel\.gradle\caches\8.13\transforms\72abf05fa0d5f6484b87fc3911634d19\transformed\activity-1.11.0\res
+com.proyectoforocine.app-startup-runtime-1.1.1-15 C:\Users\Israel\.gradle\caches\8.13\transforms\775bac89a720c198efbbb200b8241f0c\transformed\startup-runtime-1.1.1\res
+com.proyectoforocine.app-datastore-release-16 C:\Users\Israel\.gradle\caches\8.13\transforms\795ac61c1367e3105fbfa7dc9e21e550\transformed\datastore-release\res
+com.proyectoforocine.app-lifecycle-runtime-release-17 C:\Users\Israel\.gradle\caches\8.13\transforms\823330e84c06c0afacc2e334699a8ae4\transformed\lifecycle-runtime-release\res
+com.proyectoforocine.app-ui-release-18 C:\Users\Israel\.gradle\caches\8.13\transforms\8f1a913b8cacac0fcc406b84272965a0\transformed\ui-release\res
+com.proyectoforocine.app-savedstate-release-19 C:\Users\Israel\.gradle\caches\8.13\transforms\90eff5a2f2a1fb531238d9be72627d84\transformed\savedstate-release\res
+com.proyectoforocine.app-lifecycle-viewmodel-ktx-2.9.4-20 C:\Users\Israel\.gradle\caches\8.13\transforms\915be015f78e7a91e475453230a7b957\transformed\lifecycle-viewmodel-ktx-2.9.4\res
+com.proyectoforocine.app-navigation-common-2.7.7-21 C:\Users\Israel\.gradle\caches\8.13\transforms\9168db35e9313135c7c4021615c30ba3\transformed\navigation-common-2.7.7\res
+com.proyectoforocine.app-customview-poolingcontainer-1.0.0-22 C:\Users\Israel\.gradle\caches\8.13\transforms\988deda1f0c0c851f8317c00031cb9d5\transformed\customview-poolingcontainer-1.0.0\res
+com.proyectoforocine.app-navigation-common-ktx-2.7.7-23 C:\Users\Israel\.gradle\caches\8.13\transforms\991a8fa79fa3daaf2aaad296e28360c5\transformed\navigation-common-ktx-2.7.7\res
+com.proyectoforocine.app-core-viewtree-1.0.0-24 C:\Users\Israel\.gradle\caches\8.13\transforms\9e72b83fa694f85fa3bae4de5aaa36ce\transformed\core-viewtree-1.0.0\res
+com.proyectoforocine.app-lifecycle-viewmodel-release-25 C:\Users\Israel\.gradle\caches\8.13\transforms\a1463db81c460b6006f0dde18d9afa05\transformed\lifecycle-viewmodel-release\res
+com.proyectoforocine.app-material-ripple-release-26 C:\Users\Israel\.gradle\caches\8.13\transforms\a3328a3a6235220b7dcd1c89e94182ba\transformed\material-ripple-release\res
+com.proyectoforocine.app-activity-ktx-1.11.0-27 C:\Users\Israel\.gradle\caches\8.13\transforms\a57589d02dcea719ca92ad8137af44c9\transformed\activity-ktx-1.11.0\res
+com.proyectoforocine.app-core-1.17.0-28 C:\Users\Israel\.gradle\caches\8.13\transforms\a729d0b8908cf6daa89192c37f5c50c4\transformed\core-1.17.0\res
+com.proyectoforocine.app-ui-test-manifest-1.9.0-29 C:\Users\Israel\.gradle\caches\8.13\transforms\a950a618afd56a1cf80bd1b3e510075a\transformed\ui-test-manifest-1.9.0\res
+com.proyectoforocine.app-lifecycle-viewmodel-savedstate-release-30 C:\Users\Israel\.gradle\caches\8.13\transforms\b031bafca27178804470307c29dc17ee\transformed\lifecycle-viewmodel-savedstate-release\res
+com.proyectoforocine.app-navigation-runtime-ktx-2.7.7-31 C:\Users\Israel\.gradle\caches\8.13\transforms\b2c1de2e6ac1ad2884b16977e887c2f1\transformed\navigation-runtime-ktx-2.7.7\res
+com.proyectoforocine.app-graphics-path-1.0.1-32 C:\Users\Israel\.gradle\caches\8.13\transforms\ba75d7e6fee8f8a11908320fae93a0af\transformed\graphics-path-1.0.1\res
+com.proyectoforocine.app-ui-graphics-release-33 C:\Users\Israel\.gradle\caches\8.13\transforms\c0f0b90d3e6f8cf413ed3b15204fe1c5\transformed\ui-graphics-release\res
+com.proyectoforocine.app-foundation-release-34 C:\Users\Israel\.gradle\caches\8.13\transforms\c3bd561793db63fb808432d22ce71afa\transformed\foundation-release\res
+com.proyectoforocine.app-emoji2-1.4.0-35 C:\Users\Israel\.gradle\caches\8.13\transforms\c77134d94e07b7e79cc6332c89f30277\transformed\emoji2-1.4.0\res
+com.proyectoforocine.app-datastore-preferences-release-36 C:\Users\Israel\.gradle\caches\8.13\transforms\ddcc3f31c6de92cf3c93f9edf9e83aba\transformed\datastore-preferences-release\res
+com.proyectoforocine.app-navigation-compose-2.7.7-37 C:\Users\Israel\.gradle\caches\8.13\transforms\ded31393d44fba10d22441bf1e959a4b\transformed\navigation-compose-2.7.7\res
+com.proyectoforocine.app-material-icons-core-release-38 C:\Users\Israel\.gradle\caches\8.13\transforms\e0bf7ba8308e4169f5e0d5a8db805fe4\transformed\material-icons-core-release\res
+com.proyectoforocine.app-annotation-experimental-1.4.1-39 C:\Users\Israel\.gradle\caches\8.13\transforms\f622abdae9332f1b002ea20b690c29b1\transformed\annotation-experimental-1.4.1\res
+com.proyectoforocine.app-profileinstaller-1.4.0-40 C:\Users\Israel\.gradle\caches\8.13\transforms\f9ededffc1757bf1516d836013e57b28\transformed\profileinstaller-1.4.0\res
+com.proyectoforocine.app-pngs-41 E:\UNIVERSIDAD 2025 2DO SEM\APP MOVILES\proyecto foro cine\app\build\generated\res\pngs\debug
+com.proyectoforocine.app-resValues-42 E:\UNIVERSIDAD 2025 2DO SEM\APP MOVILES\proyecto foro cine\app\build\generated\res\resValues\debug
+com.proyectoforocine.app-updated_navigation_xml-43 E:\UNIVERSIDAD 2025 2DO SEM\APP MOVILES\proyecto foro cine\app\build\generated\updated_navigation_xml\debug
+com.proyectoforocine.app-packageDebugResources-44 E:\UNIVERSIDAD 2025 2DO SEM\APP MOVILES\proyecto foro cine\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.proyectoforocine.app-packageDebugResources-45 E:\UNIVERSIDAD 2025 2DO SEM\APP MOVILES\proyecto foro cine\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.proyectoforocine.app-debug-46 E:\UNIVERSIDAD 2025 2DO SEM\APP MOVILES\proyecto foro cine\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.proyectoforocine.app-debug-47 E:\UNIVERSIDAD 2025 2DO SEM\APP MOVILES\proyecto foro cine\app\src\debug\res
+com.proyectoforocine.app-main-48 E:\UNIVERSIDAD 2025 2DO SEM\APP MOVILES\proyecto foro cine\app\src\main\res
