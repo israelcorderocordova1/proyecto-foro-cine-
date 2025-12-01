@@ -180,12 +180,6 @@ El archivo de firma (keystore) se encuentra en:
 proyecto-foro-cine-/keystore/foro-cine-release.jks
 ```
 
-**Credenciales del Keystore:**
-
-- **Keystore Password:** `forocine2025`
-- **Key Alias:** `foro-cine-key`
-- **Key Password:** `forocine2025`
-
 ## 🎨 Paleta de Colores
 
 - **Primary:** #4fcee6 (Cyan vibrante)
