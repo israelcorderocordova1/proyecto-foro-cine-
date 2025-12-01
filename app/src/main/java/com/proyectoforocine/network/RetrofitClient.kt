@@ -4,9 +4,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-
-    // ⚠️ CAMBIO IMPORTANTE: Apuntar a Spring Boot
-    // 10.0.2.2 es "localhost" desde el punto de vista del emulador Android
     private const val BASE_URL_SPRING = "http://10.0.2.2:8080/"
 
     val microservicioApi: MicroservicioApiService by lazy {
