@@ -44,6 +44,19 @@ Aplicación móvil de foro de discusión sobre cine desarrollada con Android Kot
 - ✅ Carga de imágenes con Coil
 - ✅ Tests unitarios e instrumentados (69 tests)
 
+## 📖 Documentación para Desarrolladores
+
+¿Quieres agregar una nueva pantalla a la aplicación? Consulta nuestra guía completa:
+
+📝 **[Cómo Crear una Ventana View de Manera Simple](docs/COMO_CREAR_UNA_VIEW.md)**
+
+Esta guía incluye:
+- Explicación de la arquitectura MVVM + Compose
+- Pasos detallados para crear una nueva pantalla
+- Ejemplo completo de código
+- Mejores prácticas y componentes comunes
+- Integración con la navegación
+
 ## 🛠️ Tecnologías Utilizadas
 
 - **Lenguaje:** Kotlin
